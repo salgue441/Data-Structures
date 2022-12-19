@@ -30,6 +30,10 @@ public:
     T get_data() const;
     std::shared_ptr<Node<T>> get_next() const;
 
+    // Setters
+    void set_data(const T &);
+    void set_next(std::shared_ptr<Node<T>>);
+
 private:
     T data;
     std::shared_ptr<Node<T>> next;

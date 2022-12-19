@@ -65,3 +65,32 @@ std::shared_ptr<Node<T>> Node<T>::get_next() const
 {
     return next;
 }
+
+// Setters
+/**
+ * @brief
+ * Set the data stored in the node
+ * @tparam T Type of node
+ * @param data Data to be stored in the node
+ * @time complexity O(1)
+ * @space complexity O(1)
+ */
+template <typename T>
+void Node<T>::set_data(const T &data)
+{
+    this->data = data;
+}
+
+/**
+ * @brief
+ * Set the next node
+ * @tparam T Type of node
+ * @param next Pointer to the next node
+ * @time complexity O(1)
+ * @space complexity O(1)
+ */
+template <typename T>
+void Node<T>::set_next(std::shared_ptr<Node<T>> next)
+{
+    this->next = next;
+}

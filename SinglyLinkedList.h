@@ -1,7 +1,7 @@
 /**
- * @file LinkedList.h
+ * @file SinglyLinkedList.h
  * @author Carlos Salguero
- * @brief Declaration of the LinkedList class
+ * @brief Declaration of the SinglyLinkedList class
  * @version 0.1
  * @date 2022-12-18
  *
@@ -12,17 +12,24 @@
 #ifndef SINGLY_LINKED_LIST_H
 #define SINGLY_LINKED_LIST_H
 
-#include <memory>
+#include <string>
+#include <memory>     // C++11, std::shared_ptr and std::make_shared
+#include <optional>   // C++17, std::optional encapsulation
+#include <sstream>    // std::stringstream for to_string() function
+#include <functional> // std::function for sorting algorithms
 
-#include "Node.h"
+// Custom Headers
+#include "Node.cpp"
+#include "header.h"
 
-template <typename T>
+template <class T>
 class SinglyLinkedList
 {
 public:
     // Constructor
     SinglyLinkedList() = default;
     SinglyLinkedList(const T &);
+    SinglyLinkedList(const std::shared_ptr<Node<T>> &);
     SinglyLinkedList(const T &, std::shared_ptr<Node<T>>);
 
     // Destructor
@@ -36,25 +43,32 @@ public:
     T get_last() const;
     T get_at_index(const size_t &) const;
 
-    // Functions
-    long int index_of(const T &) const;
+    // Operator Overload
+    template <class ostream_t>
+    friend std::ofstream &operator<<(std::ofstream &,
+                                     const SinglyLinkedList<ostream_t> &);
 
+    // Functions
     bool is_empty() const;
     bool contains(const T &) const;
 
-    void clear();
     void push_front(const T &);
     void push_back(const T &);
-
-    void insert(const T &, const size_t &);
-    void insert(const T &, const std::shared_ptr<Node<T>> &);
-
+    void push_at_index(const T &, const size_t &);
     void pop_front();
     void pop_back();
-    void remove(const size_t &);
+    void pop_at_index(const T &);
+    void remove_at(const T &);
     void reverse();
 
     std::string to_string() const;
+
+    // Sorting Algorithms
+    void bubble_sort(const std::optional<bool> &order = true);
+    void insertion_sort(const std::optional<bool> &order = true);
+    void selection_sort(const std::optional<bool> &order = true);
+    void quick_sort(const std::optional<bool> &order = true);
+    void merge_sort(const std::optional<bool> &order = true);
 
 private:
     std::shared_ptr<Node<T>> head{};
