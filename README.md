@@ -6,8 +6,12 @@ This repository contains the data structures for easier further implementation o
 
 ### Linear Data Structures
 
-<!-- To LinearDataStructures.md file -->
-
 Implementation of the linear data structures is in the `LinearDataStructures` folder.
 
 [Linear Data Structures](LinearDataStructures/LinearDataStructures.md)
+
+### Non Linear Data Structures
+
+Implementation of the non linear data structures is in the `NonLinearDataStructures` folder.
+
+[Non Linear Data Structures](NonLinearDataStructures/NonLinearDataStructures.md)
