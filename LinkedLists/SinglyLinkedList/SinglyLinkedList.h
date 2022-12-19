@@ -13,10 +13,9 @@
 #define SINGLY_LINKED_LIST_H
 
 #include <string>
-#include <memory>     // C++11, std::shared_ptr and std::make_shared
-#include <optional>   // C++17, std::optional encapsulation
-#include <sstream>    // std::stringstream for to_string() function
-#include <functional> // std::function for sorting algorithms
+#include <memory>   // C++11, std::shared_ptr and std::make_shared
+#include <optional> // C++17, std::optional encapsulation
+#include <sstream>  // std::stringstream for to_string() function
 
 // Custom Headers
 #include "Node.cpp"
