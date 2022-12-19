@@ -1,3 +1,14 @@
+/**
+ * @file Node.cpp
+ * @author Carlos Salguero
+ * @brief Implementation of the Node class
+ * @version 0.1
+ * @date 2022-12-18
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "Node.h"
 
 // Constructor
@@ -32,6 +43,8 @@ Node<T>::Node(const T &data, std::shared_ptr<Node<T>> next)
  * Get the data stored in the node
  * @tparam T Type of node
  * @return T Data stored in the node
+ * @time complexity O(1)
+ * @space complexity O(1)
  */
 template <typename T>
 T Node<T>::get_data() const
@@ -44,6 +57,8 @@ T Node<T>::get_data() const
  * Get the next node
  * @tparam T Type of node
  * @return std::shared_ptr< Node< T>> Pointer to the next node
+ * @time complexity O(1)
+ * @space complexity O(1)
  */
 template <typename T>
 std::shared_ptr<Node<T>> Node<T>::get_next() const
