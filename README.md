@@ -12,7 +12,7 @@ The node is a data structure that contains a value and a pointer to the next nod
 
 The singly linked list is a data structure that contains a list of nodes. Each node contains a value and a pointer to the next node. The list is terminated by a null pointer.
 
-The singly linked list is implemented in the file `SinglyLinkedList.h` and `SinglyLinkedList.cpp`.
+The singly linked list is implemented in the file `LinkedList/SinglyLinkedList.h` and `LinkedList/SinglyLinkedList.cpp`.
 
 ### Doubly Linked List
 
