@@ -1,19 +1,17 @@
 #include <iostream>
-#include <memory>
+#include <memory> // C++11, smart pointers
 
-#include "LinearDataStructures/LinkedLists/DoubleLinkedList/DoubleLinkedList.cpp"
+#include "LinearDataStructures/Stack/Stack.cpp"
 
 int main()
 {
-    DoubleLinkedList<int> list;
+    Stack<int> stack(5);
 
-    list.push_front(1);
-    list.push_front(2);
-    list.push_front(3);
-    list.push_front(4);
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    stack.push(4);
+    stack.push(5);
 
-    std::cout << list << std::endl;
-
-    list.reverse();
-    std::cout << list << std::endl;
+    std::cout << stack << std::endl;
 }
