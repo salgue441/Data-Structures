@@ -1,7 +1,7 @@
 /**
  * @file Node.cpp
  * @author Carlos Salguero
- * @brief Implementation of the Node class
+ * @brief Implementation of the Node class for the SinglyLinkedList
  * @version 0.1
  * @date 2022-12-18
  *
@@ -18,7 +18,7 @@
  * @tparam T Type of node
  * @param data Data to be stored in the node
  */
-template <typename T>
+template <class T>
 Node<T>::Node(const T &data)
     : data{data}, next{nullptr}
 {
@@ -31,7 +31,7 @@ Node<T>::Node(const T &data)
  * @param data Data to be stored in the node
  * @param next Pointer to the next node
  */
-template <typename T>
+template <class T>
 Node<T>::Node(const T &data, std::shared_ptr<Node<T>> next)
     : data{data}, next{next}
 {
@@ -46,7 +46,7 @@ Node<T>::Node(const T &data, std::shared_ptr<Node<T>> next)
  * @time complexity O(1)
  * @space complexity O(1)
  */
-template <typename T>
+template <class T>
 T Node<T>::get_data() const
 {
     return data;
@@ -60,7 +60,7 @@ T Node<T>::get_data() const
  * @time complexity O(1)
  * @space complexity O(1)
  */
-template <typename T>
+template <class T>
 std::shared_ptr<Node<T>> Node<T>::get_next() const
 {
     return next;
@@ -75,7 +75,7 @@ std::shared_ptr<Node<T>> Node<T>::get_next() const
  * @time complexity O(1)
  * @space complexity O(1)
  */
-template <typename T>
+template <class T>
 void Node<T>::set_data(const T &data)
 {
     this->data = data;
@@ -89,7 +89,7 @@ void Node<T>::set_data(const T &data)
  * @time complexity O(1)
  * @space complexity O(1)
  */
-template <typename T>
+template <class T>
 void Node<T>::set_next(std::shared_ptr<Node<T>> next)
 {
     this->next = next;

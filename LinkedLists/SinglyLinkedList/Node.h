@@ -1,7 +1,7 @@
 /**
  * @file Node.h
  * @author Carlos Salguero
- * @brief Declaration of the Node class
+ * @brief Declaration of the Node class for the SinglyLinkedList
  * @version 0.1
  * @date 2022-12-18
  *
@@ -14,7 +14,7 @@
 
 #include <memory>
 
-template <typename T>
+template <class T>
 class Node
 {
 public:
