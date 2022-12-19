@@ -4,9 +4,13 @@ This repository contains the data structures for easier further implementation o
 
 ## Data Structures
 
-### Node Implementation
+### Node Implementation for Singly Linked Lists
 
-The node is a data structure that contains a value and a pointer to the next node. The node is implemented in the file `Node.h` and `Node.cpp`.
+The node is a data structure that contains a value and a pointer to the next node. The node is implemented in the file `LinkedList/SinglyLinkedList/Node.h` and `LinkedList/SinglyLinkedList/Node.cpp`.
+
+### Node Implementation for Doubly Linked Lists
+
+The node is a data structure that contains a value and a pointer to the next node and the previous node. The node is implemented in the file `LinkedList/DoublyLinkedList/Node.h` and `LinkedList/DoublyLinkedList/Node.cpp`.
 
 ### Singly Linked List
 
