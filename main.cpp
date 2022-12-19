@@ -1,25 +1,19 @@
 #include <iostream>
 #include <memory>
 
-#include "DoubleLinkedList.cpp"
+#include "LinearDataStructures/LinkedLists/DoubleLinkedList/DoubleLinkedList.cpp"
 
 int main()
 {
     DoubleLinkedList<int> list;
-    list.push_back(1);
-    list.push_back(22);
-    list.push_back(3);
-    list.push_back(4);
-    list.push_back(52);
-    list.push_back(6);
+
+    list.push_front(1);
+    list.push_front(2);
+    list.push_front(3);
+    list.push_front(4);
 
     std::cout << list << std::endl;
 
-    list.merge_sort();
+    list.reverse();
     std::cout << list << std::endl;
-
-    list.merge_sort(false);
-    std::cout << list << std::endl;
-
-    return 0;
 }
