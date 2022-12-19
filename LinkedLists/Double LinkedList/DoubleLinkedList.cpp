@@ -43,18 +43,6 @@ DoubleLinkedList<T>::DoubleLinkedList(const T &data,
     size = 1;
 }
 
-// Destructor
-/**
- * @brief
- * Destroy the DoubleLinkedList< T>:: DoubleLinkedList object
- * @tparam T Type of node
- */
-template <class T>
-DoubleLinkedList<T>::~DoubleLinkedList()
-{
-    clear();
-}
-
 // Getters
 /**
  * @brief
@@ -516,7 +504,7 @@ std::string DoubleLinkedList<T>::to_string() const
  * @space complexity O(1)
  */
 template <class T>
-void DoubleLinkedList<T>::bubble_sort(std::optional<bool> &order)
+void DoubleLinkedList<T>::bubble_sort(const std::optional<bool> &order)
 {
     if (is_empty())
         throw std::runtime_error("List is empty");
@@ -528,6 +516,133 @@ void DoubleLinkedList<T>::bubble_sort(std::optional<bool> &order)
         bubble_sort_descending();
 }
 
+/**
+ * @brief
+ * Selection sort algorithm. This algorithm is not efficient for large lists.
+ * The algorithm divides the input list into two parts: the sublist of items
+ * already sorted, which is built up from left to right at the front (left)
+ * of the list, and the sublist of items remaining to be sorted that occupy
+ * the rest of the list. Initially, the sorted sublist is empty and the
+ * unsorted sublist is the entire input list. The algorithm proceeds by
+ * finding the smallest (or largest, depending on sorting order) element in
+ * the unsorted sublist, exchanging (swapping) it with the leftmost unsorted
+ * element (putting it in sorted order), and moving the sublist boundaries
+ * one element to the right.
+ * @tparam T Type of node
+ * @param order Optional parameter to specify the order of the sorting.
+ *            If true, the list will be sorted in ascending order.
+ *             (default behaviour)
+ *            If false, the list will be sorted in descending order.
+ * @throw std::runtime_error if the list is empty
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void DoubleLinkedList<T>::selection_sort(const std::optional<bool> &order)
+{
+    if (is_empty())
+        throw std::runtime_error("List is empty");
+
+    if (order.value_or(true))
+        selection_sort_ascending();
+
+    else
+        selection_sort_descending();
+}
+
+/**
+ * @brief
+ * Insertion sort algorithm. This algorithm is not efficient for large lists.
+ * The algorithm iterates, consuming one input element each repetition, and
+ * growing a sorted output list. At each iteration, insertion sort removes
+ * one element from the input data, finds the location it belongs within
+ * the sorted list, and inserts it there. It repeats until no input elements
+ * remain.
+ * @tparam T Type of node
+ * @param order Optional parameter to specify the order of the sorting.
+ *            If true, the list will be sorted in ascending order.
+ *             (default behaviour)
+ *            If false, the list will be sorted in descending order.
+ * @throw std::runtime_error if the list is empty
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void DoubleLinkedList<T>::insertion_sort(const std::optional<bool> &order)
+{
+    if (is_empty())
+        throw std::runtime_error("List is empty");
+
+    if (order.value_or(true))
+        insertion_sort_ascending();
+
+    else
+        insertion_sort_descending();
+}
+
+/**
+ * @brief
+ * Quick sort algorithm. This algorithm is not efficient for large lists.
+ * The algorithm picks an element as pivot and partitions the given array
+ * around the picked pivot. There are many different versions of quickSort
+ * that pick pivot in different ways.
+ * @tparam T Type of node
+ * @param order Optional parameter to specify the order of the sorting.
+ *           If true, the list will be sorted in ascending order.
+ *           (default behaviour)
+ *          If false, the list will be sorted in descending order.
+ * @throw std::runtime_error if the list is empty
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void DoubleLinkedList<T>::quick_sort(const std::optional<bool> &order)
+{
+    if (is_empty())
+        throw std::runtime_error("List is empty");
+
+    if (order.value_or(true))
+        quick_sort_ascending();
+
+    else
+        quick_sort_descending();
+}
+
+/**
+ * @brief
+ * Merge sort algorithm. This algorithm is not efficient for large lists.
+ * The algorithm divides the input array into two halves, calls itself for
+ * the two halves, and then merges the two sorted halves. The merge() function
+ * is used for merging two halves. The merge(arr, l, m, r) is a key process
+ * that assumes that arr[l..m] and arr[m+1..r] are sorted and merges the
+ * two sorted sub-arrays into one.
+ * @tparam T Type of node
+ * @param order Optional parameter to specify the order of the sorting.
+ *           If true, the list will be sorted in ascending order.
+ *           (default behaviour)
+ *          If false, the list will be sorted in descending order.
+ * @throw std::runtime_error if the list is empty
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void DoubleLinkedList<T>::merge_sort(const std::optional<bool> &order)
+{
+    if (is_empty())
+        throw std::runtime_error("List is empty");
+
+    if (order.value_or(true))
+        merge_sort_ascending();
+
+    else
+        merge_sort_descending();
+}
+
+// Private Sorting algorithms
 /**
  * @brief
  * Bubble sort. Ascending order.
@@ -549,7 +664,11 @@ void DoubleLinkedList<T>::bubble_sort_ascending()
         while (next != nullptr)
         {
             if (current->get_data() > next->get_data())
-                std::swap(current->get_data(), next->get_data());
+            {
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
+            }
 
             next = next->get_next();
         }
@@ -579,48 +698,17 @@ void DoubleLinkedList<T>::bubble_sort_descending()
         while (next != nullptr)
         {
             if (current->get_data() < next->get_data())
-                std::swap(current->get_data(), next->get_data());
+            {
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
+            }
 
             next = next->get_next();
         }
 
         current = current->get_next();
     }
-}
-
-/**
- * @brief
- * Selection sort algorithm. This algorithm is not efficient for large lists.
- * The algorithm divides the input list into two parts: the sublist of items
- * already sorted, which is built up from left to right at the front (left)
- * of the list, and the sublist of items remaining to be sorted that occupy
- * the rest of the list. Initially, the sorted sublist is empty and the
- * unsorted sublist is the entire input list. The algorithm proceeds by
- * finding the smallest (or largest, depending on sorting order) element in
- * the unsorted sublist, exchanging (swapping) it with the leftmost unsorted
- * element (putting it in sorted order), and moving the sublist boundaries
- * one element to the right.
- * @tparam T Type of node
- * @param order Optional parameter to specify the order of the sorting.
- *            If true, the list will be sorted in ascending order.
- *             (default behaviour)
- *            If false, the list will be sorted in descending order.
- * @throw std::runtime_error if the list is empty
- * @return void
- * @time complexity O(n^2)
- * @space complexity O(1)
- */
-template <class T>
-void DoubleLinkedList<T>::selection_sort(std::optional<bool> &order)
-{
-    if (is_empty())
-        throw std::runtime_error("List is empty");
-
-    if (order.value_or(true))
-        selection_sort_ascending();
-
-    else
-        selection_sort_descending();
 }
 
 /**
@@ -651,7 +739,10 @@ void DoubleLinkedList<T>::selection_sort_ascending()
             next = next->get_next();
         }
 
-        std::swap(current->get_data(), min->get_data());
+        auto temp = current->get_data();
+        current->set_data(min->get_data());
+        min->set_data(temp);
+
         current = current->get_next();
     }
 }
@@ -684,113 +775,12 @@ void DoubleLinkedList<T>::selection_sort_descending()
             next = next->get_next();
         }
 
-        std::swap(current->get_data(), max->get_data());
+        auto temp = current->get_data();
+        current->set_data(max->get_data());
+        max->set_data(temp);
+
         current = current->get_next();
     }
-}
-
-/**
- * @brief
- * Selection sort algorithm. This algorithm is not efficient for large lists.
- * The algorithm divides the input list into two parts: the sublist of items
- * already sorted, which is built up from left to right at the front (left)
- * of the list, and the sublist of items remaining to be sorted that occupy
- * the rest of the list. Initially, the sorted sublist is empty and the
- * unsorted sublist is the entire input list. The algorithm proceeds by
- * finding the smallest (or largest, depending on sorting order) element in
- * the unsorted sublist, exchanging (swapping) it with the leftmost unsorted
- * element (putting it in sorted order), and moving the sublist boundaries
- * one element to the right.
- * @tparam T Type of node
- * @param order Optional parameter to specify the order of the sorting.
- *            If true, the list will be sorted in ascending order.
- *             (default behaviour)
- *            If false, the list will be sorted in descending order.
- * @throw std::runtime_error if the list is empty
- * @return void
- * @time complexity O(n^2)
- * @space complexity O(1)
- */
-template <class T>
-void DoubleLinkedList<T>::selection_sort(std::optional<bool> &order)
-{
-    if (is_empty())
-        throw std::runtime_error("List is empty");
-
-    std::shared_ptr<Node<T>> current = head;
-    std::shared_ptr<Node<T>> next = nullptr;
-    std::shared_ptr<Node<T>> min = nullptr;
-
-    if (order.value_or(true))
-    {
-        while (current != nullptr)
-        {
-            min = current;
-            next = current->get_next();
-
-            while (next != nullptr)
-            {
-                if (min->get_data() > next->get_data())
-                    min = next;
-
-                next = next->get_next();
-            }
-
-            std::swap(current->get_data(), min->get_data());
-            current = current->get_next();
-        }
-    }
-
-    else
-    {
-        while (current != nullptr)
-        {
-            min = current;
-            next = current->get_next();
-
-            while (next != nullptr)
-            {
-                if (min->get_data() < next->get_data())
-                    min = next;
-
-                next = next->get_next();
-            }
-
-            std::swap(current->get_data(), min->get_data());
-            current = current->get_next();
-        }
-    }
-}
-
-/**
- * @brief
- * Insertion sort algorithm. This algorithm is not efficient for large lists.
- * The algorithm iterates, consuming one input element each repetition, and
- * growing a sorted output list. At each iteration, insertion sort removes
- * one element from the input data, finds the location it belongs within
- * the sorted list, and inserts it there. It repeats until no input elements
- * remain.
- * @tparam T Type of node
- * @param order Optional parameter to specify the order of the sorting.
- *            If true, the list will be sorted in ascending order.
- *             (default behaviour)
- *            If false, the list will be sorted in descending order.
- * @throw std::runtime_error if the list is empty
- * @return void
- * @time complexity O(n^2)
- * @space complexity O(1)
- */
-template <class T>
-void DoubleLinkedList<T>::insertion_sort(std::optional<bool> &order)
-{
-    if (is_empty())
-        throw std::runtime_error("List is empty");
-
-    if (order.value_or(true))
-        insertion_sort_ascending();
-
-    else
-        insertion_sort_descending();
 }
 
 /**
@@ -907,35 +897,6 @@ void DoubleLinkedList<T>::insertion_sort_descending()
 
 /**
  * @brief
- * Quick sort algorithm. This algorithm is not efficient for large lists.
- * The algorithm picks an element as pivot and partitions the given array
- * around the picked pivot. There are many different versions of quickSort
- * that pick pivot in different ways.
- * @tparam T Type of node
- * @param order Optional parameter to specify the order of the sorting.
- *           If true, the list will be sorted in ascending order.
- *           (default behaviour)
- *          If false, the list will be sorted in descending order.
- * @throw std::runtime_error if the list is empty
- * @return void
- * @time complexity O(n^2)
- * @space complexity O(1)
- */
-template <class T>
-void DoubleLinkedList<T>::quick_sort(std::optional<bool> &order)
-{
-    if (is_empty())
-        throw std::runtime_error("List is empty");
-
-    if (order.value_or(true))
-        quick_sort_ascending();
-
-    else
-        quick_sort_descending();
-}
-
-/**
- * @brief
  * Quick sort. Ascending order.
  * @tparam T Type of node
  * @return void
@@ -945,16 +906,48 @@ void DoubleLinkedList<T>::quick_sort(std::optional<bool> &order)
 template <class T>
 void DoubleLinkedList<T>::quick_sort_ascending()
 {
-    auto pivot = tail;
-    auto current = head;
-    auto temp = head;
+    if (head == nullptr)
+        return;
 
-    while (current != pivot)
+    std::shared_ptr<Node<T>> current = head;
+    std::shared_ptr<Node<T>> next = nullptr;
+    std::shared_ptr<Node<T>> temp = nullptr;
+
+    while (current != nullptr)
     {
-        if (current->get_data() < pivot->get_data())
+        next = current->get_next();
+
+        while (next != nullptr)
         {
-            std::swap(current->get_data(), temp->get_data());
-            temp = temp->get_next();
+            if (current->get_data() > next->get_data())
+            {
+                temp = next->get_next();
+
+                next->set_next(current);
+                next->set_prev(current->get_prev());
+
+                current->set_next(temp);
+                current->set_prev(next);
+
+                // For next node
+                if (next->get_prev() != nullptr)
+                    next->get_prev()->set_next(next);
+
+                else
+                    head = next;
+
+                // For temp node
+                if (temp != nullptr)
+                    temp->set_prev(current);
+
+                else
+                    tail = current;
+
+                next = temp;
+            }
+
+            else
+                next = next->get_next();
         }
 
         current = current->get_next();
@@ -968,20 +961,171 @@ void DoubleLinkedList<T>::quick_sort_ascending()
  * @return void
  * @time complexity O(n^2)
  * @space complexity O(1)
+ * @todo Fix quick sort descending
  */
 template <class T>
 void DoubleLinkedList<T>::quick_sort_descending()
 {
-    auto pivot = tail;
-    auto current = head;
-    auto temp = head;
+    if (head == nullptr)
+        return;
 
-    while (current != pivot)
+    auto current = head;
+    std::shared_ptr<Node<T>> next = nullptr;
+    std::shared_ptr<Node<T>> temp = nullptr;
+
+    while (current != nullptr)
     {
-        if (current->get_data() > pivot->get_data())
+        next = current->get_next();
+
+        while (next != nullptr)
         {
-            std::swap(current->get_data(), temp->get_data());
-            temp = temp->get_next();
+            if (current->get_data() < next->get_data())
+            {
+                temp = next->get_next();
+
+                next->set_next(current);
+                next->set_prev(current->get_prev());
+
+                current->set_next(temp);
+                current->set_prev(next);
+
+                // For next node
+                if (next->get_prev() != nullptr)
+                    next->get_prev()->set_next(next);
+
+                else
+                    head = next;
+
+                // For temp node
+                if (temp != nullptr)
+                    temp->set_prev(current);
+
+                else
+                    tail = current;
+
+                next = temp;
+            }
+
+            else
+                next = next->get_next();
+        }
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Merge sort. Ascending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void DoubleLinkedList<T>::merge_sort_ascending()
+{
+    if (head == nullptr)
+        return;
+
+    std::shared_ptr<Node<T>> current = head;
+    std::shared_ptr<Node<T>> next = nullptr;
+    std::shared_ptr<Node<T>> temp = nullptr;
+
+    while (current != nullptr)
+    {
+        next = current->get_next();
+
+        while (next != nullptr)
+        {
+            if (current->get_data() > next->get_data())
+            {
+                temp = next->get_next();
+
+                next->set_next(current);
+                next->set_prev(current->get_prev());
+
+                current->set_next(temp);
+                current->set_prev(next);
+
+                // For next node
+                if (next->get_prev() != nullptr)
+                    next->get_prev()->set_next(next);
+
+                else
+                    head = next;
+
+                // For temp node
+                if (temp != nullptr)
+                    temp->set_prev(current);
+
+                else
+                    tail = current;
+
+                next = temp;
+            }
+
+            else
+                next = next->get_next();
+        }
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Merge sort. Descending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void DoubleLinkedList<T>::merge_sort_descending()
+{
+    if (head == nullptr)
+        return;
+
+    std::shared_ptr<Node<T>> current = head;
+    std::shared_ptr<Node<T>> next = nullptr;
+    std::shared_ptr<Node<T>> temp = nullptr;
+
+    while (current != nullptr)
+    {
+        next = current->get_next();
+
+        while (next != nullptr)
+        {
+            if (current->get_data() < next->get_data())
+            {
+                temp = next->get_next();
+
+                next->set_next(current);
+                next->set_prev(current->get_prev());
+
+                current->set_next(temp);
+                current->set_prev(next);
+
+                // For next node
+                if (next->get_prev() != nullptr)
+                    next->get_prev()->set_next(next);
+
+                else
+                    head = next;
+
+                // For temp node
+                if (temp != nullptr)
+                    temp->set_prev(current);
+
+                else
+                    tail = current;
+
+                next = temp;
+            }
+
+            else
+                next = next->get_next();
         }
 
         current = current->get_next();
