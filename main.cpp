@@ -1,17 +1,14 @@
 #include <iostream>
 #include <memory> // C++11, smart pointers
 
-#include "LinearDataStructures/Stack/Stack.cpp"
+#include "LinearDataStructures/Queue/Queue.cpp"
 
 int main()
 {
-    Stack<int> stack(5);
+    Queue<int> queue;
 
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.push(4);
-    stack.push(5);
-
-    std::cout << stack << std::endl;
-}
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    queue.enqueue(4);
+};
