@@ -15,3 +15,9 @@ Implementation of the linear data structures is in the `LinearDataStructures` fo
 Implementation of the non linear data structures is in the `NonLinearDataStructures` folder.
 
 [Non Linear Data Structures](NonLinearDataStructures/NonLinearDataStructures.md)
+
+### Abstract Data Types
+
+Implementation of the abstract data types is in the `AbstractDataStructures` folder.
+
+[Abstract Data Types](AbstractDataTypes/AbstractDataTypes.md)
