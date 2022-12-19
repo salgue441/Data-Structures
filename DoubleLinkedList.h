@@ -17,7 +17,7 @@
 #include <optional> // C++17, std::optional encapsulation
 #include <sstream>  // std::stringstream for to_string() function
 
-#include "Node.h"
+#include "Node.cpp"
 
 template <class T>
 class DoubleLinkedList
