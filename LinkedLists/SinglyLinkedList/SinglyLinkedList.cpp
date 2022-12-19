@@ -205,6 +205,21 @@ bool SinglyLinkedList<T>::contains(const T &data) const
 
 /**
  * @brief
+ * Clears the list
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(1)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyLinkedList<T>::clear()
+{
+    head = nullptr;
+    size = 0;
+}
+
+/**
+ * @brief
  * Add a new node to the front of the list
  * @tparam T Type of node
  * @param data Data to be stored in the new node
@@ -479,56 +494,11 @@ std::string SinglyLinkedList<T>::to_string() const
 template <class T>
 void SinglyLinkedList<T>::bubble_sort(const std::optional<bool> &order)
 {
-    if (head == nullptr)
-        return;
+    if (order.value_or(true))
+        bubble_sort_ascending();
 
-    auto current = head;
-    auto next = std::shared_ptr<Node<T>>(nullptr);
-
-    while (current != nullptr)
-    {
-        next = current->get_next();
-
-        while (next != nullptr)
-        {
-            if (order.has_value())
-            {
-                if (order.value())
-                {
-                    if (current->get_data() > next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-
-                else
-                {
-                    if (current->get_data() < next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-            }
-
-            else
-            {
-                if (current->get_data() > next->get_data())
-                {
-                    auto temp = current->get_data();
-                    current->set_data(next->get_data());
-                    next->set_data(temp);
-                }
-            }
-
-            next = next->get_next();
-        }
-
-        current = current->get_next();
-    }
+    else
+        bubble_sort_descending();
 }
 
 /**
@@ -546,56 +516,11 @@ void SinglyLinkedList<T>::bubble_sort(const std::optional<bool> &order)
 template <class T>
 void SinglyLinkedList<T>::insertion_sort(const std::optional<bool> &order)
 {
-    if (head == nullptr)
-        return;
+    if (order.value_or(true))
+        insertion_sort_ascending();
 
-    auto current = head;
-    auto next = std::shared_ptr<Node<T>>(nullptr);
-
-    while (current != nullptr)
-    {
-        next = current->get_next();
-
-        while (next != nullptr)
-        {
-            if (order.has_value())
-            {
-                if (order.value())
-                {
-                    if (current->get_data() > next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-
-                else
-                {
-                    if (current->get_data() < next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-            }
-
-            else
-            {
-                if (current->get_data() > next->get_data())
-                {
-                    auto temp = current->get_data();
-                    current->set_data(next->get_data());
-                    next->set_data(temp);
-                }
-            }
-
-            next = next->get_next();
-        }
-
-        current = current->get_next();
-    }
+    else
+        insertion_sort_descending();
 }
 
 /**
@@ -603,8 +528,13 @@ void SinglyLinkedList<T>::insertion_sort(const std::optional<bool> &order)
  * Selection sort algorithm. A sorting algorithm that divides the input list
  * into two parts: the sublist of items already sorted, which is built up
  * from left to right at the front (left) of the list, and the sublist of
- * items remaining to be sorted that occupy the rest of the list. Allows the
- * user to choose the sorting order
+ * items remaining to be sorted that occupy the rest of the list. Initially,
+ * the sorted sublist is empty and the unsorted sublist is the entire input
+ * list. The algorithm proceeds by finding the smallest (or largest, depending
+ * on sorting order) element in the unsorted sublist, exchanging (swapping) it
+ * with the leftmost unsorted element (putting it in sorted order), and moving
+ * the sublist boundaries one element to the right.
+ * Allows the user to choose the sorting order
  * @tparam T Type of node
  * @param order Sorting order (true = ascending (default), false = descending)
  * @return void
@@ -614,56 +544,11 @@ void SinglyLinkedList<T>::insertion_sort(const std::optional<bool> &order)
 template <class T>
 void SinglyLinkedList<T>::selection_sort(const std::optional<bool> &order)
 {
-    if (head == nullptr)
-        return;
+    if (order.value_or(true))
+        selection_sort_ascending();
 
-    auto current = head;
-    auto next = std::shared_ptr<Node<T>>(nullptr);
-
-    while (current != nullptr)
-    {
-        next = current->get_next();
-
-        while (next != nullptr)
-        {
-            if (order.has_value())
-            {
-                if (order.value())
-                {
-                    if (current->get_data() > next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-
-                else
-                {
-                    if (current->get_data() < next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-            }
-
-            else
-            {
-                if (current->get_data() > next->get_data())
-                {
-                    auto temp = current->get_data();
-                    current->set_data(next->get_data());
-                    next->set_data(temp);
-                }
-            }
-
-            next = next->get_next();
-        }
-
-        current = current->get_next();
-    }
+    else
+        selection_sort_descending();
 }
 
 /**
@@ -682,56 +567,11 @@ void SinglyLinkedList<T>::selection_sort(const std::optional<bool> &order)
 template <class T>
 void SinglyLinkedList<T>::quick_sort(const std::optional<bool> &order)
 {
-    if (head == nullptr)
-        return;
+    if (order.value_or(true))
+        quick_sort_ascending();
 
-    auto current = head;
-    auto next = std::shared_ptr<Node<T>>(nullptr);
-
-    while (current != nullptr)
-    {
-        next = current->get_next();
-
-        while (next != nullptr)
-        {
-            if (order.has_value())
-            {
-                if (order.value())
-                {
-                    if (current->get_data() > next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-
-                else
-                {
-                    if (current->get_data() < next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-            }
-
-            else
-            {
-                if (current->get_data() > next->get_data())
-                {
-                    auto temp = current->get_data();
-                    current->set_data(next->get_data());
-                    next->set_data(temp);
-                }
-            }
-
-            next = next->get_next();
-        }
-
-        current = current->get_next();
-    }
+    else
+        quick_sort_descending();
 }
 
 /**
@@ -743,11 +583,31 @@ void SinglyLinkedList<T>::quick_sort(const std::optional<bool> &order)
  * user to choose the sorting order
  * @tparam T Type of node
  * @param order Sorting order (true = ascending (default), false = descending)
+ * @return void
  * @time complexity O(n log n)
  * @space complexity O(n)
  */
 template <class T>
 void SinglyLinkedList<T>::merge_sort(const std::optional<bool> &order)
+{
+    if (order.value_or(true))
+        merge_sort_ascending();
+
+    else
+        merge_sort_descending();
+}
+
+// Private sorting algorithms
+/**
+ * @brief
+ * Bubble sort algorithm. Ascending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyLinkedList<T>::bubble_sort_ascending()
 {
     if (head == nullptr)
         return;
@@ -761,37 +621,344 @@ void SinglyLinkedList<T>::merge_sort(const std::optional<bool> &order)
 
         while (next != nullptr)
         {
-            if (order.has_value())
+            if (current->get_data() > next->get_data())
             {
-                if (order.value())
-                {
-                    if (current->get_data() > next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
-
-                else
-                {
-                    if (current->get_data() < next->get_data())
-                    {
-                        auto temp = current->get_data();
-                        current->set_data(next->get_data());
-                        next->set_data(temp);
-                    }
-                }
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
             }
 
-            else
+            next = next->get_next();
+        }
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Bubble sort algorithm. Descending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyLinkedList<T>::bubble_sort_descending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head;
+    auto next = std::shared_ptr<Node<T>>(nullptr);
+
+    while (current != nullptr)
+    {
+        next = current->get_next();
+
+        while (next != nullptr)
+        {
+            if (current->get_data() < next->get_data())
             {
-                if (current->get_data() > next->get_data())
-                {
-                    auto temp = current->get_data();
-                    current->set_data(next->get_data());
-                    next->set_data(temp);
-                }
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
+            }
+
+            next = next->get_next();
+        }
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Insertion sort algorithm. Ascending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyLinkedList<T>::insertion_sort_ascending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head->get_next();
+
+    while (current != nullptr)
+    {
+        auto next = current->get_next();
+        auto temp = head;
+
+        while (temp != current)
+        {
+            if (temp->get_data() > current->get_data())
+            {
+                auto temp_data = temp->get_data();
+                temp->set_data(current->get_data());
+                current->set_data(temp_data);
+            }
+
+            temp = temp->get_next();
+        }
+
+        current = next;
+    }
+}
+
+/**
+ * @brief
+ * Insertion sort algorithm. Descending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyLinkedList<T>::insertion_sort_descending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head->get_next();
+
+    while (current != nullptr)
+    {
+        auto next = current->get_next();
+        auto temp = head;
+
+        while (temp != current)
+        {
+            if (temp->get_data() < current->get_data())
+            {
+                auto temp_data = temp->get_data();
+                temp->set_data(current->get_data());
+                current->set_data(temp_data);
+            }
+
+            temp = temp->get_next();
+        }
+
+        current = next;
+    }
+}
+
+/**
+ * @brief
+ * Selection sort algorithm. Ascending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyLinkedList<T>::selection_sort_ascending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head;
+
+    while (current != nullptr)
+    {
+        auto next = current->get_next();
+        auto temp = current;
+
+        while (next != nullptr)
+        {
+            if (temp->get_data() > next->get_data())
+                temp = next;
+
+            next = next->get_next();
+        }
+
+        auto temp_data = temp->get_data();
+        temp->set_data(current->get_data());
+        current->set_data(temp_data);
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Selection sort algorithm. Descending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyLinkedList<T>::selection_sort_descending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head;
+
+    while (current != nullptr)
+    {
+        auto next = current->get_next();
+        auto temp = current;
+
+        while (next != nullptr)
+        {
+            if (temp->get_data() < next->get_data())
+                temp = next;
+
+            next = next->get_next();
+        }
+
+        auto temp_data = temp->get_data();
+        temp->set_data(current->get_data());
+        current->set_data(temp_data);
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Quick sort algorithm. Ascending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n log n)
+ * @space complexity O(n)
+ */
+template <class T>
+void SinglyLinkedList<T>::quick_sort_ascending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head;
+    auto next = std::shared_ptr<Node<T>>(nullptr);
+
+    while (current != nullptr)
+    {
+        next = current->get_next();
+
+        while (next != nullptr)
+        {
+            if (current->get_data() > next->get_data())
+            {
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
+            }
+
+            next = next->get_next();
+        }
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Quick sort algorithm. Descending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n log n)
+ * @space complexity O(n)
+ */
+template <class T>
+void SinglyLinkedList<T>::quick_sort_descending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head;
+    auto next = std::shared_ptr<Node<T>>(nullptr);
+
+    while (current != nullptr)
+    {
+        next = current->get_next();
+
+        while (next != nullptr)
+        {
+            if (current->get_data() < next->get_data())
+            {
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
+            }
+
+            next = next->get_next();
+        }
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Merge sort algorithm. Ascending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n log n)
+ * @space complexity O(n)
+ */
+template <class T>
+void SinglyLinkedList<T>::merge_sort_ascending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head;
+    auto next = std::shared_ptr<Node<T>>(nullptr);
+
+    while (current != nullptr)
+    {
+        next = current->get_next();
+
+        while (next != nullptr)
+        {
+            if (current->get_data() > next->get_data())
+            {
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
+            }
+
+            next = next->get_next();
+        }
+
+        current = current->get_next();
+    }
+}
+
+/**
+ * @brief
+ * Merge sort algorithm. Descending order.
+ * @tparam T Type of node
+ * @return void
+ * @time complexity O(n log n)
+ * @space complexity O(n)
+ */
+template <class T>
+void SinglyLinkedList<T>::merge_sort_descending()
+{
+    if (head == nullptr)
+        return;
+
+    auto current = head;
+    auto next = std::shared_ptr<Node<T>>(nullptr);
+
+    while (current != nullptr)
+    {
+        next = current->get_next();
+
+        while (next != nullptr)
+        {
+            if (current->get_data() < next->get_data())
+            {
+                auto temp = current->get_data();
+                current->set_data(next->get_data());
+                next->set_data(temp);
             }
 
             next = next->get_next();

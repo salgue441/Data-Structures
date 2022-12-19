@@ -20,8 +20,8 @@ class Node
 public:
     // Constructor
     Node() = default;
-    Node(const T &);
-    Node(const T &, std::shared_ptr<Node<T>>);
+    Node(const T);
+    Node(const T, std::shared_ptr<Node<T>>);
 
     // Destructor
     ~Node() = default;

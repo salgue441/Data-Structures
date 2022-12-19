@@ -19,7 +19,6 @@
 
 // Custom Headers
 #include "Node.cpp"
-#include "header.h"
 
 template <class T>
 class SinglyLinkedList
@@ -51,6 +50,7 @@ public:
     bool is_empty() const;
     bool contains(const T &) const;
 
+    void clear();
     void push_front(const T &);
     void push_back(const T &);
     void push_at_index(const T &, const size_t &);
@@ -72,6 +72,22 @@ public:
 private:
     std::shared_ptr<Node<T>> head{};
     unsigned int size{};
+
+    // Private Sorting Algorithms
+    void bubble_sort_ascending();
+    void bubble_sort_descending();
+
+    void insertion_sort_ascending();
+    void insertion_sort_descending();
+
+    void selection_sort_ascending();
+    void selection_sort_descending();
+
+    void quick_sort_ascending();
+    void quick_sort_descending();
+
+    void merge_sort_ascending();
+    void merge_sort_descending();
 };
 
 #endif //! SINGLY_LINKED_LIST_H

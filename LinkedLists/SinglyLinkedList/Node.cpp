@@ -19,7 +19,7 @@
  * @param data Data to be stored in the node
  */
 template <class T>
-Node<T>::Node(const T &data)
+Node<T>::Node(const T data)
     : data{data}, next{nullptr}
 {
 }
@@ -32,7 +32,7 @@ Node<T>::Node(const T &data)
  * @param next Pointer to the next node
  */
 template <class T>
-Node<T>::Node(const T &data, std::shared_ptr<Node<T>> next)
+Node<T>::Node(const T data, std::shared_ptr<Node<T>> next)
     : data{data}, next{next}
 {
 }
