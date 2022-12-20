@@ -16,6 +16,8 @@
 #include <memory>   // C++11, smart pointers
 #include <optional> // C++17, std::optional encapsulation
 #include <sstream>  // std::stringstream for the to_string() method
+#include <queue>    // for the to_string() method
+#include <stack>    // for the in_order(), pre_order() and post_order() methods
 
 #include "Node.cpp"
 
@@ -25,7 +27,7 @@ class BinaryTree
 public:
     // Constructor
     BinaryTree() = default;
-    BinaryTree(const T &);
+    BinaryTree(std::shared_ptr<T>);
 
     // Destructor
     ~BinaryTree() = default;
@@ -43,6 +45,7 @@ public:
     bool is_leaf(const std::shared_ptr<Node<T>> &) const;
 
     std::optional<std::shared_ptr<Node<T>>> find(const T &) const;
+    std::optional<std::shared_ptr<Node<T>>> find_parent(const T &) const;
 
     void insert(const T &);
     void remove(const T &);
