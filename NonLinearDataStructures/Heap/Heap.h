@@ -12,11 +12,9 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-#include <string>
-#include <memory>   // std::shared_ptr, for get_root()
-#include <optional> // std::optional, for find()
-#include <sstream>  // std::stringstream, for to_string()
-#include <queue>    // std::queue, for std_string()
+#include <memory>
+#include <optional>
+#include <queue>
 
 #include "Node.cpp"
 
@@ -26,42 +24,37 @@ class Heap
 public:
     // Constructor
     Heap() = default;
-    Heap(size_t);
-    Heap(const std::shared_ptr<Node<T>> &);
-    Heap(const std::shared_ptr<Node<T>> &, size_t);
+    Heap(std::shared_ptr<Node<T>> &);
 
     // Destructor
     ~Heap() = default;
 
-    // Getters
+    // Getter
     std::shared_ptr<Node<T>> get_root() const;
-    size_t get_size() const;
 
-    // Operator overloads
+    // Operator overload
     template <typename ostream_t>
-    friend std::ostream &operator<<(ostream_t &, const Heap<ostream_t> &);
+    friend std::ostream &operator<<(std::ostream &, const Heap<T> &);
 
     // Methods
     bool is_empty() const;
 
     void insert(const T &);
     void remove(const T &);
-    void clear();
 
-    std::optional<std::shared_ptr<Node<T>>> find(
-        const std::shared_ptr<Node<T>> &) const;
-    std::string to_string() const;
+    std::optional<std::shared_ptr<Node<T>>> extract_max();
+    std::optional<std::shared_ptr<Node<T>>> search(const T &) const;
 
 private:
-    std::shared_ptr<Node<T>> m_root;
-    size_t m_size;
+    std::shared_ptr<Node<T>> root;
 
-    // Sorting methods
-    void heap_sort();
-    void heapify();
+    // Helper functions
+    std::shared_ptr<Node<T>> get_parent(std::shared_ptr<Node<T>> &);
+    std::shared_ptr<Node<T>> get_left_child(std::shared_ptr<Node<T>> &);
+    std::shared_ptr<Node<T>> get_right_child(std::shared_ptr<Node<T>> &);
 
-    // Heap methods
-    void build_heap();
+    void swap(std::shared_ptr<Node<T>> &, std::shared_ptr<Node<T>> &);
+    void heapify(std::shared_ptr<Node<T>> &);
 };
 
 #endif //! HEAP_H

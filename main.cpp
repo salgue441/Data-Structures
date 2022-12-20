@@ -1,20 +1,33 @@
 #include <iostream>
 #include <memory> // C++11, smart pointers
 
-#include "NonLinearDataStructures/AVLTree/AVL.cpp"
+#include "NonLinearDataStructures/Heap/Heap.cpp"
 
 int main()
 {
-    AVL<int> avl;
+    Heap<int> heap;
 
-    avl.insert(10);
-    avl.insert(20);
-    avl.insert(30);
-    avl.insert(40);
-    avl.insert(50);
-    avl.insert(25);
+    heap.insert(10);
+    heap.insert(20);
+    heap.insert(30);
+    heap.insert(40);
+    heap.insert(50);
+    heap.insert(60);
 
-    std::cout << avl.to_string() << std::endl;
+    std::cout << heap << std::endl;
 
-        return 0;
+    heap.remove(20);
+    std::cout << heap << std::endl;
+
+    // extract min
+    auto max = heap.extract_max();
+
+    if (max.has_value())
+        std::cout << "Max: " << max.value()->get_data() << std::endl;
+
+    // search
+    auto search = heap.search(30);
+
+    if (search.has_value())
+        std::cout << "Found: " << search.value()->get_data() << std::endl;
 }
