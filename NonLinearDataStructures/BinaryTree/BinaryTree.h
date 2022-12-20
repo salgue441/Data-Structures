@@ -47,8 +47,18 @@ public:
     std::optional<std::shared_ptr<Node<T>>> find(const T &) const;
     std::optional<std::shared_ptr<Node<T>>> find_parent(const T &) const;
 
+    std::optional<std::shared_ptr<Node<T>>> find_min(
+        const std::shared_ptr<Node<T>> &) const;
+    std::optional<std::shared_ptr<Node<T>>> find_max(
+        const std::shared_ptr<Node<T>> &) const;
+
+    std::optional<std::shared_ptr<Node<T>>> find_successor(
+        const std::shared_ptr<Node<T>> &) const;
+
     void insert(const T &);
     void remove(const T &);
+    void remove_child(const std::shared_ptr<Node<T>> &,
+                      const std::shared_ptr<Node<T>> &);
     void clear();
 
     std::string to_string() const;

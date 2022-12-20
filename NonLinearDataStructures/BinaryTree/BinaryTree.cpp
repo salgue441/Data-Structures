@@ -122,6 +122,73 @@ std::optional<std::shared_ptr<Node<T>>> BinaryTree<T>::find(const T &data) const
 
 /**
  * @brief
+ * Finds the minimum value in the binary tree.
+ * @tparam T Type of data
+ * @return std::optional<std::shared_ptr<Node<T>>> Node found
+ * @time complexity O(n)
+ * @space complexity O(n)
+ */
+template <class T>
+std::optional<std::shared_ptr<Node<T>>> BinaryTree<T>::find_min(
+    const std::shared_ptr<Node<T>> &node) const
+{
+    std::shared_ptr<Node<T>> current_node = node;
+
+    while (current_node != nullptr && current_node->get_left() != nullptr)
+        current_node = current_node->get_left();
+
+    return current_node;
+}
+
+/**
+ * @brief
+ * Finds the maximum value in the binary tree.
+ * @tparam T Type of data
+ * @return std::optional<std::shared_ptr<Node<T>>> Node found
+ * @time complexity O(n)
+ * @space complexity O(n)
+ */
+template <class T>
+std::optional<std::shared_ptr<Node<T>>> BinaryTree<T>::find_max(
+    const std::shared_ptr<Node<T>> &node) const
+{
+    std::shared_ptr<Node<T>> current_node = node;
+
+    while (current_node != nullptr && current_node->get_right() != nullptr)
+        current_node = current_node->get_right();
+
+    return current_node;
+}
+
+/**
+ * @brief
+ * Find the successor of a node in the binary tree
+ * @tparam T Type of data
+ * @param node Node to find the successor
+ * @return std::optional<std::shared_ptr<Node<T>>>
+ */
+template <class T>
+std::optional<std::shared_ptr<Node<T>>>
+BinaryTree<T>::find_successor(
+    const std::shared_ptr<Node<T>> &node) const
+{
+    if (node->get_right() != nullptr)
+        return find_min(node->get_right());
+
+    std::shared_ptr<Node<T>> current_node = node;
+    std::shared_ptr<Node<T>> parent_node = node->get_parent();
+
+    while (parent_node != nullptr && current_node == parent_node->get_right())
+    {
+        current_node = parent_node;
+        parent_node = parent_node->get_parent();
+    }
+
+    return parent_node;
+}
+
+/**
+ * @brief
  * Insert a node in the binary tree
  * @tparam T Type of data
  * @param data Data to insert
@@ -237,6 +304,26 @@ void BinaryTree<T>::remove(const T &data)
 
         current_node->set_data(successor_data);
     }
+}
+
+/**
+ * @brief
+ * Removes the child of a node.
+ * @tparam T Type of data
+ * @param node Node to remove the child
+ * @param child Child to remove
+ * @time complexity O(n)
+ * @space complexity O(n)
+ */
+template <class T>
+void BinaryTree<T>::remove_child(
+    const std::shared_ptr<Node<T>> &node,
+    const std::shared_ptr<Node<T>> &child)
+{
+    if (node->get_left() == child)
+        node->set_left(nullptr);
+
+    node->set_right(nullptr);
 }
 
 /**
