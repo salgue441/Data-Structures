@@ -1,33 +1,20 @@
 #include <iostream>
 #include <memory> // C++11, smart pointers
 
-#include "NonLinearDataStructures/Heap/Heap.cpp"
+#include "NonLinearDataStructures/SplayTree/SplayTree.cpp"
 
 int main()
 {
-    Heap<int> heap;
+    SplayTree<int> splay_tree;
 
-    heap.insert(10);
-    heap.insert(20);
-    heap.insert(30);
-    heap.insert(40);
-    heap.insert(50);
-    heap.insert(60);
+    splay_tree.insert(10);
+    splay_tree.insert(20);
+    splay_tree.insert(30);
+    splay_tree.insert(40);
+    splay_tree.insert(50);
+    splay_tree.insert(25);
 
-    std::cout << heap << std::endl;
+    std::cout << splay_tree << std::endl;
 
-    heap.remove(20);
-    std::cout << heap << std::endl;
-
-    // extract min
-    auto max = heap.extract_max();
-
-    if (max.has_value())
-        std::cout << "Max: " << max.value()->get_data() << std::endl;
-
-    // search
-    auto search = heap.search(30);
-
-    if (search.has_value())
-        std::cout << "Found: " << search.value()->get_data() << std::endl;
+    return 0;
 }
