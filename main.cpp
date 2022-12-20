@@ -1,19 +1,20 @@
 #include <iostream>
 #include <memory> // C++11, smart pointers
 
-#include "NonLinearDataStructures/BinaryTree/BinaryTree.cpp"
+#include "NonLinearDataStructures/AVLTree/AVL.cpp"
 
 int main()
 {
-    BinaryTree<int> tree;
+    AVL<int> avl;
 
-    tree.insert(5);
-    tree.insert(3);
-    tree.insert(7);
-    tree.insert(2);
+    avl.insert(10);
+    avl.insert(20);
+    avl.insert(30);
+    avl.insert(40);
+    avl.insert(50);
+    avl.insert(25);
 
-    std::cout << tree << std::endl;
-    std::cout << tree.post_order() << std::endl;
+    std::cout << avl.to_string() << std::endl;
 
-    return 0;
-};
+        return 0;
+}
