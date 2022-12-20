@@ -24,7 +24,7 @@ class SplayTree
 public:
     // Constructor
     SplayTree() = default;
-    SplayTree(std::shared_ptr<Node<T>> &);
+    SplayTree(const std::shared_ptr<Node<T>> &);
 
     // Destructor
     ~SplayTree() = default;
@@ -48,18 +48,25 @@ public:
 private:
     std::shared_ptr<Node<T>> root;
 
-    // Helper functions
+    // Getters
     std::shared_ptr<Node<T>> get_parent(const std::shared_ptr<Node<T>> &) const;
+    std::shared_ptr<Node<T>> get_grandparent(
+        const std::shared_ptr<Node<T>> &) const;
     std::shared_ptr<Node<T>> get_left_child(
         const std::shared_ptr<Node<T>> &) const;
     std::shared_ptr<Node<T>> get_right_child(
         const std::shared_ptr<Node<T>> &) const;
 
-    void left_rotate(const std::shared_ptr<Node<T>> &);
-    void right_rotate(const std::shared_ptr<Node<T>> &);
+    // Helper functions
+    void zig_rotation(const std::shared_ptr<Node<T>> &);
+    void zag_rotation(const std::shared_ptr<Node<T>> &);
+    void zig_zig_rotation(const std::shared_ptr<Node<T>> &);
+    void zag_zag_rotation(const std::shared_ptr<Node<T>> &);
+    void zig_zag_rotation(const std::shared_ptr<Node<T>> &);
+    void zag_zig_rotation(const std::shared_ptr<Node<T>> &);
     void swap(const std::shared_ptr<Node<T>> &,
               const std::shared_ptr<Node<T>> &);
-    void splay(std::shared_ptr<Node<T>> &);
+    void splay(const std::shared_ptr<Node<T>> &);
 };
 
 #endif //! SPLAY_TREE_H

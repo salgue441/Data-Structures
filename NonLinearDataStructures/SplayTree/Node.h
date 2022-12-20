@@ -36,6 +36,7 @@ public:
     void set_data(const T &);
     void set_left(const std::shared_ptr<Node<T>> &);
     void set_right(const std::shared_ptr<Node<T>> &);
+    void set_parent(const std::shared_ptr<Node<T>> &);
 
 private:
     T data;

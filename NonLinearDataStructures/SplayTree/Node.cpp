@@ -118,3 +118,22 @@ void Node<T>::set_right(const std::shared_ptr<Node<T>> &right)
 {
     this->right = right;
 }
+
+/**
+ * @brief
+ * Set the parent of the node
+ * @tparam T Type of the data stored in the node
+ * @param node Parent of the node
+ * @time complexity O(1)
+ */
+template <class T>
+void Node<T>::set_parent(const std::shared_ptr<Node<T>> &node)
+{
+    auto parent = std::make_shared<Node<T>>(node);
+
+    if (parent->get_left() == nullptr)
+        parent->set_left(std::make_shared<Node<T>>(*this));
+
+    else
+        parent->set_right(std::make_shared<Node<T>>(*this));
+}
