@@ -848,6 +848,7 @@ std::string SplayTree<T>::in_order() const
 
     in_order(node->get_left());
     stream << node->get_data() << " ";
+
     in_order(node->get_right());
   };
 
@@ -881,6 +882,7 @@ std::string SplayTree<T>::pre_order() const
       return;
 
     stream << node->get_data() << " ";
+
     pre_order(node->get_left());
     pre_order(node->get_right());
   };
@@ -916,6 +918,7 @@ std::string SplayTree<T>::post_order() const
 
     post_order(node->get_left());
     post_order(node->get_right());
+
     stream << node->get_data() << " ";
   };
 
