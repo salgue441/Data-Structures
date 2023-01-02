@@ -12,11 +12,12 @@
 #ifndef SPLAYTREE_H
 #define SPLAYTREE_H
 
-#include <memory> // C++11, smart pointers
-#include <queue>  // C++11, queue
-#include <optional>
-#include <string>
-#include <sstream>
+#include <memory>     // C++11, smart pointers for Node class
+#include <queue>      // C++11, queue for level order traversal
+#include <optional>   // C++17, optional for find method
+#include <string>     // C++11, string for to_string method
+#include <sstream>    // C++11, stringstream for to_string method
+#include <functional> // C++11, function for in_order, pre_order, post_order methods
 
 #include "Node.cpp"
 
@@ -43,6 +44,7 @@ public:
   bool is_empty() const;
   bool contains(const T &) const;
   bool contains_node(const std::shared_ptr<Node<T>> &) const;
+  std::optional<std::shared_ptr<Node<T>>> find(const T &) const;
   std::optional<std::shared_ptr<Node<T>>> find(
       const std::shared_ptr<Node<T>> &, const T &) const;
 
@@ -50,7 +52,9 @@ public:
   void remove(const T &);
   void clear();
 
-  std::string to_string() const;
+  std::string in_order() const;
+  std::string pre_order() const;
+  std::string post_order() const;
 
 private:
   std::shared_ptr<Node<T>> root;
@@ -62,9 +66,11 @@ private:
 
   // Private methods
   void splay(const std::shared_ptr<Node<T>> &);
+
   void zig(const std::shared_ptr<Node<T>> &);
   void zig_zig(const std::shared_ptr<Node<T>> &);
   void zig_zag(const std::shared_ptr<Node<T>> &);
+
   void zag(const std::shared_ptr<Node<T>> &);
   void zag_zag(const std::shared_ptr<Node<T>> &);
   void zag_zig(const std::shared_ptr<Node<T>> &);

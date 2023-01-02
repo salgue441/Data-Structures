@@ -598,6 +598,51 @@ bool SplayTree<T>::contains_node(const std::shared_ptr<Node<T>> &node) const
 
 /**
  * @brief
+ * Find a node in the tree with a specific data
+ * @tparam T Type of the data to be stored in the tree
+ * @param data Data to find in the tree
+ * @return std::shared_ptr<Node<T>> Node with the data
+ * @return std::nullopt If the data is not in the tree
+ * @time complexity O(log n)
+ * @space complexity O(1)
+ */
+template <class T>
+std::optional<std::shared_ptr<Node<T>>>
+SplayTree<T>::find(const T &data) const
+{
+  return find(root, data);
+}
+
+/**
+ * @brief
+ * Find a node in the tree
+ * @tparam T Type of the data to be stored in the tree
+ * @param node Node to start the search
+ * @param data Data to find in the tree
+ * @return std::shared_ptr<Node<T>> Node with the data
+ * @return std::nullopt If the data is not in the tree
+ * @time complexity O(log n)
+ * @space complexity O(1)
+ */
+template <class T>
+std::optional<std::shared_ptr<Node<T>>>
+SplayTree<T>::find(
+    const std::shared_ptr<Node<T>> &node, const T &data) const
+{
+  if (node == nullptr)
+    return std::nullopt;
+
+  if (node->get_data() == data)
+    return node;
+
+  if (data < node->get_data())
+    return find(node->get_left(), data);
+
+  return find(node->get_right(), data);
+}
+
+/**
+ * @brief
  * Insert a node in the tree
  * @tparam T Type of the data to be stored in the tree
  * @param data Data to be stored in the node
@@ -775,4 +820,106 @@ void SplayTree<T>::clear()
     throw std::invalid_argument("Tree is empty");
 
   root = nullptr;
+}
+
+/**
+ * @brief
+ * Prints the tree in order.
+ * @tparam T Type of the data to be stored in the tree
+ * @return std::string String representation of the tree
+ * @throw std::invalid_argument If the tree is empty
+ * @time complexity O(n)
+ * @space complexity O(n)
+ */
+template <class T>
+std::string SplayTree<T>::in_order() const
+{
+  if (is_empty())
+    throw std::invalid_argument("Tree is empty");
+
+  std::stringstream stream;
+
+  // Lambda function to print the tree in order
+  std::function<void(const std::shared_ptr<Node<T>> &)> in_order =
+      [&stream, &in_order](const std::shared_ptr<Node<T>> &node)
+  {
+    if (node == nullptr)
+      return;
+
+    in_order(node->get_left());
+    stream << node->get_data() << " ";
+    in_order(node->get_right());
+  };
+
+  in_order(root);
+
+  return stream.str();
+}
+
+/**
+ * @brief
+ * Prints the tree in pre order.
+ * @tparam T Type of the data to be stored in the tree
+ * @return std::string String representation of the tree
+ * @throw std::invalid_argument If the tree is empty
+ * @time complexity O(n)
+ * @space complexity O(n)
+ */
+template <class T>
+std::string SplayTree<T>::pre_order() const
+{
+  if (is_empty())
+    throw std::invalid_argument("Tree is empty");
+
+  std::stringstream stream;
+
+  // Lambda function to print the tree in pre order
+  std::function<void(const std::shared_ptr<Node<T>> &)> pre_order =
+      [&stream, &pre_order](const std::shared_ptr<Node<T>> &node)
+  {
+    if (node == nullptr)
+      return;
+
+    stream << node->get_data() << " ";
+    pre_order(node->get_left());
+    pre_order(node->get_right());
+  };
+
+  pre_order(root);
+
+  return stream.str();
+}
+
+/**
+ * @brief
+ * Prints the tree in post order.
+ * @tparam T Type of the data to be stored in the tree
+ * @return std::string String representation of the tree
+ * @throw std::invalid_argument If the tree is empty
+ * @time complexity O(n)
+ * @space complexity O(n)
+ */
+template <class T>
+std::string SplayTree<T>::post_order() const
+{
+  if (is_empty())
+    throw std::invalid_argument("Tree is empty");
+
+  std::stringstream stream;
+
+  // Lambda function to print the tree in post order
+  std::function<void(const std::shared_ptr<Node<T>> &)> post_order =
+      [&stream, &post_order](const std::shared_ptr<Node<T>> &node)
+  {
+    if (node == nullptr)
+      return;
+
+    post_order(node->get_left());
+    post_order(node->get_right());
+    stream << node->get_data() << " ";
+  };
+
+  post_order(root);
+
+  return stream.str();
 }

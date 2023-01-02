@@ -14,7 +14,14 @@ int main()
     tree.insert(4);
     tree.insert(6);
     tree.insert(8);
-    
 
-    std::cout << tree << std::endl;
+    std::cout << tree.in_order() << std::endl;
+    std::cout << tree.pre_order() << std::endl;
+    std::cout << tree.post_order() << std::endl;
+
+    auto node = tree.find(4);
+
+    (node)
+        ? std::cout << "Found node: " << node.value()->get_data() << std::endl
+        : std::cout << "Node not found" << std::endl;
 }
