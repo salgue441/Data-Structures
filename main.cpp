@@ -5,16 +5,16 @@
 
 int main()
 {
-    SplayTree<int> splay_tree;
+    SplayTree<int> tree;
 
-    splay_tree.insert(10);
-    splay_tree.insert(20);
-    splay_tree.insert(30);
-    splay_tree.insert(40);
-    splay_tree.insert(50);
-    splay_tree.insert(25);
+    tree.insert(5);
+    tree.insert(3);
+    tree.insert(7);
+    tree.insert(1);
+    tree.insert(4);
+    tree.insert(6);
+    tree.insert(8);
+    
 
-    std::cout << splay_tree << std::endl;
-
-    return 0;
+    std::cout << tree << std::endl;
 }

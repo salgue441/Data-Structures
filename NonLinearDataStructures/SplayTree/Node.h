@@ -1,43 +1,51 @@
 /**
-* @file Node.h
-* @author Carlos Salguero
-* @brief Node class declaration for Splay Tree. 
-*
-* @version 0.1
-*
-* @date 2023-01-01
-*/
+ * @file Node.h
+ * @author Carlos Salguero
+ * @brief Declaration of the Node class for SplayTree
+ * @version 0.1
+ * @date 2023-01-01
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
 #ifndef NODE_H
 #define NODE_H
 
-#include <memory>
+#include <memory> // C++11, smart pointers
 
 template <class T>
 class Node
 {
 public:
-  // Constructor
+  // Constructors
   Node() = default;
-  Node(std::shared_ptr<Node>, std::shared_ptr<Node>);
-  Node(std::shared_ptr<Node> &, std::shared_ptr<Node> &);
+  Node(const T &);
+  Node(const T &, std::shared_ptr<Node<T>>);
+  Node(const T &, std::shared_ptr<Node<T>>, std::shared_ptr<Node<T>>);
+  Node(const T &, std::shared_ptr<Node<T>>, std::shared_ptr<Node<T>>,
+       std::shared_ptr<Node<T>>);
 
   // Destructor
   ~Node() = default;
 
   // Getters
-  std::shared_ptr<Node> get_left() const;
-  std::shared_ptr<Node> get_right() const;
+  T get_data() const;
+  std::shared_ptr<Node<T>> get_left() const;
+  std::shared_ptr<Node<T>> get_right() const;
+  std::shared_ptr<Node<T>> get_parent() const;
 
   // Setters
-  void set_left(std::shared_ptr<Node>);
-  void set_right(std::shared_ptr<Node>);
-  void set_left(std::shared_ptr<Node> &);
-  void set_right(std::shared_ptr<Node> &);
+  void set_data(const T &);
+  void set_left(std::shared_ptr<Node<T>>);
+  void set_right(std::shared_ptr<Node<T>>);
+  void set_parent(std::shared_ptr<Node<T>>);
 
 private:
-    std::shared_ptr<Node> left;
-    std::shared_ptr<Node> right;
+  T data;
+  std::shared_ptr<Node<T>> left;
+  std::shared_ptr<Node<T>> right;
+  std::shared_ptr<Node<T>> parent;
 };
 
 #endif //! NODE_H
