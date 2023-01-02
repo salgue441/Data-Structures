@@ -50,6 +50,7 @@ public:
 
   void insert(const T &);
   void remove(const T &);
+  void remove_node(const std::shared_ptr<Node<T>> &);
   void clear();
 
   std::string in_order() const;

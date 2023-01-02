@@ -571,6 +571,7 @@ template <class T>
 bool SplayTree<T>::contains(const T &data) const
 {
   auto node = std::make_shared<Node<T>>(data);
+
   return contains_node(node);
 }
 
@@ -593,7 +594,21 @@ bool SplayTree<T>::contains_node(const std::shared_ptr<Node<T>> &node) const
   if (node == root)
     return true;
 
-  return contains_node(node->get_parent());
+  auto current = root;
+
+  while (current != nullptr)
+  {
+    if (node->get_data() == current->get_data())
+      return true;
+
+    else if (node->get_data() < current->get_data())
+      current = current->get_left();
+
+    else
+      current = current->get_right();
+  }
+
+  return false;
 }
 
 /**
@@ -704,104 +719,84 @@ void SplayTree<T>::insert(const T &data)
 template <class T>
 void SplayTree<T>::remove(const T &data)
 {
-  if (!contains(data))
+  auto node = find(data);
+
+  if (!node.has_value())
     throw std::invalid_argument("Data is not in the tree");
 
-  auto node = find_node(data);
+  remove_node(node.value());
+}
 
-  if (node->get_left() == nullptr && node->get_right() == nullptr)
+/**
+ * @brief
+ * Remove a node from the tree
+ * @tparam T Type of the data to be stored in the tree
+ * @param node Node to be removed from the tree
+ * @throw std::invalid_argument If the node is not in the tree
+ * @time complexity O(log n)
+ * @space complexity O(1)
+ */
+template <class T>
+void SplayTree<T>::remove_node(const std::shared_ptr<Node<T>> &node)
+{
+  if (!contains_node(node))
+    throw std::invalid_argument("Node is not in the tree");
+
+  if (node == root)
   {
-    if (node == root)
-    {
-      root = nullptr;
-      return;
-    }
-
-    auto parent = node->get_parent();
-
-    if (parent->get_left() == node)
-      parent->set_left(nullptr);
-
-    else
-      parent->set_right(nullptr);
-
-    splay(parent);
+    root = nullptr;
+    return;
   }
 
-  else if (node->get_left() == nullptr)
+  auto parent = std::make_shared<Node<T>>();
+  auto current = root;
+
+  while (current != nullptr)
   {
-    auto right = node->get_right();
+    if (node->get_data() == current->get_data())
+      break;
 
-    if (node == root)
-    {
-      root = right;
-      right->set_parent(nullptr);
-      return;
-    }
+    parent = current;
 
-    auto parent = node->get_parent();
-
-    if (parent->get_left() == node)
-      parent->set_left(right);
+    if (node->get_data() < current->get_data())
+      current = current->get_left();
 
     else
-      parent->set_right(right);
-
-    right->set_parent(parent);
-    splay(right);
+      current = current->get_right();
   }
 
-  else if (node->get_right() == nullptr)
+  if (current->get_left() == nullptr)
   {
-    auto left = node->get_left();
-
-    if (node == root)
-    {
-      root = left;
-      left->set_parent(nullptr);
-      return;
-    }
-
-    auto parent = node->get_parent();
-
-    if (parent->get_left() == node)
-      parent->set_left(left);
+    if (parent->get_left() == current)
+      parent->set_left(current->get_right());
 
     else
-      parent->set_right(left);
+      parent->set_right(current->get_right());
+  }
 
-    left->set_parent(parent);
-    splay(left);
+  else if (current->get_right() == nullptr)
+  {
+    if (parent->get_left() == current)
+      parent->set_left(current->get_left());
+
+    else
+      parent->set_right(current->get_left());
   }
 
   else
   {
-    auto successor = get_successor(node);
-    auto parent = node->get_parent();
+    auto successor = current->get_right();
 
-    if (parent->get_left() == node)
+    while (successor->get_left() != nullptr)
+      successor = successor->get_left();
+
+    if (parent->get_left() == current)
       parent->set_left(successor);
 
     else
       parent->set_right(successor);
 
-    successor->set_parent(parent);
-    successor->set_left(node->get_left());
-    node->get_left()->set_parent(successor);
-
-    if (successor != node->get_right())
-    {
-      auto successor_parent = successor->get_parent();
-      successor_parent->set_left(successor->get_right());
-
-      if (successor->get_right() != nullptr)
-        successor->get_right()->set_parent(successor_parent);
-
-      successor->set_right(node->get_right());
-      node->get_right()->set_parent(successor);
-    }
-
-    splay(successor);
+    successor->set_left(current->get_left());
   }
 }
 

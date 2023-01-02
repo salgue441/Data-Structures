@@ -5,23 +5,21 @@
 
 int main()
 {
-    SplayTree<int> tree;
+    SplayTree<int> splay_tree;
 
-    tree.insert(5);
-    tree.insert(3);
-    tree.insert(7);
-    tree.insert(1);
-    tree.insert(4);
-    tree.insert(6);
-    tree.insert(8);
+    splay_tree.insert(10);
+    splay_tree.insert(5);
+    splay_tree.insert(15);
+    splay_tree.insert(2);
+    splay_tree.insert(7);
+    splay_tree.insert(12);
+    splay_tree.insert(17);
 
-    std::cout << tree.in_order() << std::endl;
-    std::cout << tree.pre_order() << std::endl;
-    std::cout << tree.post_order() << std::endl;
+    std::cout << splay_tree << std::endl;
 
-    auto node = tree.find(4);
+    // remove
+    auto node = splay_tree.find(5);
 
-    (node)
-        ? std::cout << "Found node: " << node.value()->get_data() << std::endl
-        : std::cout << "Node not found" << std::endl;
+    splay_tree.remove(5);
+    std::cout << splay_tree << std::endl;
 }
