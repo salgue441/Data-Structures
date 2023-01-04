@@ -1,25 +1,35 @@
 #include <iostream>
-#include <memory> // C++11, smart pointers
+#include <optional>
+#include <memory>
 
-#include "NonLinearDataStructures/SplayTree/SplayTree.cpp"
+#include "LinearDataStructures/LinkedLists/SinglyCircularLinkedList/SinglyCircularLinkedList.cpp"
 
 int main()
 {
-    SplayTree<int> splay_tree;
+    SinglyCircularLinkedList<int> list;
 
-    splay_tree.insert(10);
-    splay_tree.insert(5);
-    splay_tree.insert(15);
-    splay_tree.insert(2);
-    splay_tree.insert(7);
-    splay_tree.insert(12);
-    splay_tree.insert(17);
+    list.push_front(1);
+    list.push_front(2);
+    list.push_front(3);
 
-    std::cout << splay_tree << std::endl;
+    list.push_back(4);
+    list.push_back(5);
+    list.push_back(6);
 
-    // remove
-    auto node = splay_tree.find(5);
+    list.insert(7, 3);
+    list.insert(8, 0);
 
-    splay_tree.remove(5);
-    std::cout << splay_tree << std::endl;
+    std::cout << list << std::endl;
+
+    list.pop_front();
+    list.pop_back();
+    list.remove(3);
+
+    std::cout << list << std::endl;
+
+    list.reverse();
+    std::cout << list << std::endl;
+
+    list.ascending_bubble_sort();
+    std::cout << list << std::endl;
 }
