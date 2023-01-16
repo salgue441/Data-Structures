@@ -6,7 +6,7 @@ Singly linked lists consist of nodes where each node contains a data field as we
 
 The elements in a linked list are linked using pointers as shown in the below image:
 
-![Linked List](../../../ReadMeImages/Single%20linked%20list%20.png)
+![Linked List](../../../../ReadMeImages/Single%20linked%20list%20.png)
 
 ## Advantages
 

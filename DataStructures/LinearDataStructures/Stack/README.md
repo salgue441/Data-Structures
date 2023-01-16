@@ -4,7 +4,7 @@ Stack is a linear data structure which follows a particular order in which the o
 
 Stack elements are added and removed from the same end. This end is called the top of the stack. The opposite end is called the base of the stack. The elements in a stack are linked in the following way:
 
-![Stack](../../ReadMeImages/Stack.png)
+![Stack](../../../ReadMeImages/Stack.png)
 
 ## Advantages
 

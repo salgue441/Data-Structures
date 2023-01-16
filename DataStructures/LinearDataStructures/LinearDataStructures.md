@@ -16,7 +16,7 @@ The node is a data structure that contains a value and a pointer to the next nod
 
 The image below shows a singly linked list with 4 nodes. The nodes are connected by pointers. The list is terminated by a null pointer.
 
-![Singly Linked List](../ReadMeImages/Single%20linked%20list%20.png)
+![Singly Linked List](../../ReadMeImages/Single%20linked%20list%20.png)
 
 ## Doubly Linked List
 
@@ -32,7 +32,7 @@ The node is a data structure that contains a value and a pointer to the next nod
 
 The image below shows a doubly linked list with 4 nodes. The nodes are connected by pointers. The list is terminated by a null pointer.
 
-![Doubly Linked List](../ReadMeImages/Double%20Linked%20List.png)
+![Doubly Linked List](../../ReadMeImages/Double%20Linked%20List.png)
 
 ## Sinlgly Circular Linked List
 
@@ -48,7 +48,7 @@ The node is a data structure that contains a value and a pointer to the next nod
 
 The image below shows a singly circular linked list with 4 nodes. The nodes are connected by pointers. The last node points to the first node.
 
-![Singly Circular Linked List](../ReadMeImages/Single%20Circular%20Linked%20List%20.png)
+![Singly Circular Linked List](../../ReadMeImages/Single%20Circular%20Linked%20List%20.png)
 
 ## Doubly Circular Linked List
 
@@ -64,7 +64,7 @@ The node is a data structure that contains a value and a pointer to the next nod
 
 The image below shows a doubly circular linked list with 4 nodes. The nodes are connected by pointers. The last node points to the first node.
 
-![Doubly Circular Linked List](../ReadMeImages/Double%20circular%20linked%20list%20.png)
+![Doubly Circular Linked List](../../ReadMeImages/Double%20circular%20linked%20list%20.png)
 
 ## Stack
 
@@ -78,7 +78,7 @@ The node is a data structure that contains a value and a pointer to the next nod
 
 The image below shows a stack with 4 elements. The elements are added to the top of the stack. The elements are removed from the top of the stack.
 
-![Stack](../ReadMeImages/Stack.png)
+![Stack](../../ReadMeImages/Stack.png)
 
 ## Queue
 
@@ -92,4 +92,4 @@ The node is a data structure that contains a value and a pointer to the next nod
 
 The image below shows a queue with 4 elements. The elements are added to the end of the queue. The elements are removed from the front of the queue.
 
-![Queue](../ReadMeImages/Queue.png)
+![Queue](../../ReadMeImages/Queue.png)

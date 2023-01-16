@@ -4,7 +4,7 @@ Queue is a linear data structure which follows a particular order in which the o
 
 The elements are added at the end of the queue and removed from the front of the queue. This makes queue a First In First Out (FIFO) data structure. The elements in a queue are linked in the following way:
 
-![Queue](../../ReadMeImages/Queue.png)
+![Queue](../../../ReadMeImages/Queue.png)
 
 ## Advantages
 
