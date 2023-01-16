@@ -465,3 +465,297 @@ void SinglyCircularLinkedList<T>::ascending_bubble_sort()
         }
     }
 }
+
+/**
+ * @brief
+ * Bubble sort algorithm. Sorts the list in descending order.
+ * @tparam T Type of data
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyCircularLinkedList<T>::descending_bubble_sort()
+{
+    if (this->is_empty())
+        throw std::runtime_error("The list is empty");
+
+    if (this->size == 1)
+        return;
+
+    std::shared_ptr<Node<T>> current_node = this->head;
+    std::shared_ptr<Node<T>> next_node;
+
+    for (size_t i{}; i < this->size - 1; i++)
+    {
+        current_node = this->head;
+
+        for (size_t j{}; j < this->size - i - 1; j++)
+        {
+            next_node = current_node->get_next();
+
+            if (current_node->get_data() < next_node->get_data())
+                swap_nodes(current_node, next_node);
+
+            current_node = current_node->get_next();
+        }
+    }
+}
+
+/**
+ * @brief
+ * Selection sort algorithm. Sorts the list in ascending order.
+ * @tparam T Type of data
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyCircularLinkedList<T>::ascending_selection_sort()
+{
+    if (this->is_empty())
+        throw std::runtime_error("The list is empty");
+
+    if (this->size == 1)
+        return;
+
+    std::shared_ptr<Node<T>> current_node = this->head;
+    std::shared_ptr<Node<T>> next_node;
+
+    for (size_t i{}; i < this->size - 1; i++)
+    {
+        current_node = this->head;
+
+        for (size_t j{}; j < this->size - i - 1; j++)
+        {
+            next_node = current_node->get_next();
+
+            if (current_node->get_data() > next_node->get_data())
+                swap_nodes(current_node, next_node);
+
+            current_node = current_node->get_next();
+        }
+    }
+}
+
+/**
+ * @brief
+ * Selection sort algorithm. Sorts the list in descending order.
+ * @tparam T Type of data
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyCircularLinkedList<T>::descending_selection_sort()
+{
+    if (this->is_empty())
+        throw std::runtime_error("The list is empty");
+
+    if (this->size == 1)
+        return;
+
+    std::shared_ptr<Node<T>> current_node = this->head;
+    std::shared_ptr<Node<T>> next_node;
+
+    for (size_t i{}; i < this->size - 1; i++)
+    {
+        current_node = this->head;
+
+        for (size_t j{}; j < this->size - i - 1; j++)
+        {
+            next_node = current_node->get_next();
+
+            if (current_node->get_data() < next_node->get_data())
+                swap_nodes(current_node, next_node);
+
+            current_node = current_node->get_next();
+        }
+    }
+}
+
+/**
+ * @brief
+ * Insertion sort algorithm. Sorts the list in ascending order.
+ * @tparam T Type of data
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyCircularLinkedList<T>::ascending_insertion_sort()
+{
+    if (this->is_empty())
+        throw std::runtime_error("The list is empty");
+
+    if (this->size == 1)
+        return;
+
+    std::shared_ptr<Node<T>> current_node = this->head;
+    std::shared_ptr<Node<T>> next_node;
+
+    for (size_t i{}; i < this->size - 1; i++)
+    {
+        current_node = this->head;
+
+        for (size_t j{}; j < this->size - i - 1; j++)
+        {
+            next_node = current_node->get_next();
+
+            if (current_node->get_data() > next_node->get_data())
+                swap_nodes(current_node, next_node);
+
+            current_node = current_node->get_next();
+        }
+    }
+}
+
+/**
+ * @brief
+ * Insertion sort algorithm. Sorts the list in descending order.
+ * @tparam T Type of data
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n^2)
+ * @space complexity O(1)
+ */
+template <class T>
+void SinglyCircularLinkedList<T>::descending_insertion_sort()
+{
+    if (this->is_empty())
+        throw std::runtime_error("The list is empty");
+
+    if (this->size == 1)
+        return;
+
+    std::shared_ptr<Node<T>> current_node = this->head;
+    std::shared_ptr<Node<T>> next_node;
+
+    for (size_t i{}; i < this->size - 1; i++)
+    {
+        current_node = this->head;
+
+        for (size_t j{}; j < this->size - i - 1; j++)
+        {
+            next_node = current_node->get_next();
+
+            if (current_node->get_data() < next_node->get_data())
+                swap_nodes(current_node, next_node);
+
+            current_node = current_node->get_next();
+        }
+    }
+}
+
+/**
+ * @brief
+ * Merge sort algorithm. Sorts the list in ascending order.
+ * @tparam T Type of data
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n log n)
+ * @space complexity O(n)
+ */
+template <class T>
+void SinglyCircularLinkedList<T>::ascending_merge_sort()
+{
+    if (this->is_empty())
+        throw std::runtime_error("The list is empty");
+
+    if (this->size == 1)
+        return;
+
+    this->head = merge_sort(this->head);
+}
+
+/**
+ * @brief
+ * Merge sort algorithm for ascending order.
+ * @tparam T Type of data
+ * @param head Head of the list
+ * @return std::shared_ptr<Node<T>> Head of the sorted list
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n log n)
+ * @space complexity O(n)
+ */
+template <class T>
+std::shared_ptr<Node<T>> SinglyCircularLinkedList<T>::merge_sort(std::shared_ptr<Node<T>> head)
+{
+    if (head == nullptr || head->get_next() == nullptr)
+        return head;
+
+    std::shared_ptr<Node<T>> middle = middle(head);
+    std::shared_ptr<Node<T>> next_of_middle = middle->get_next();
+
+    middle->set_next(nullptr);
+
+    std::shared_ptr<Node<T>> left = merge_sort(head);
+    std::shared_ptr<Node<T>> right = merge_sort(next_of_middle);
+
+    return merge(left, right);
+}
+
+/**
+ * @brief
+ * Merge sort algorithm for ascending order.
+ * @tparam T Type of data
+ * @param left Left list
+ * @param right Right list
+ * @return std::shared_ptr<Node<T>> Head of the sorted list
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n log n)
+ * @space complexity O(n)
+ */
+template <class T>
+std::shared_ptr<Node<T>> SinglyCircularLinkedList<T>::merge(std::shared_ptr<Node<T>> left, std::shared_ptr<Node<T>> right)
+{
+    if (left == nullptr)
+        return right;
+
+    if (right == nullptr)
+        return left;
+
+    std::shared_ptr<Node<T>> result = nullptr;
+
+    if (left->get_data() <= right->get_data())
+    {
+        result = left;
+        result->set_next(merge(left->get_next(), right));
+    }
+
+    else
+    {
+        result = right;
+        result->set_next(merge(left, right->get_next()));
+    }
+
+    return result;
+}
+
+/**
+ * @brief
+ * Middle of the list.
+ * @tparam T Type of data
+ * @param head Head of the list
+ * @return std::shared_ptr<Node<T>> Middle of the list
+ * @throw std::runtime_error If the list is empty
+ * @time complexity O(n)
+ * @space complexity O(1)
+ */
+template <class T>
+std::shared_ptr<Node<T>> SinglyCircularLinkedList<T>::middle(
+    std::shared_ptr<Node<T>> &head)
+{
+    if (head == nullptr)
+        return head;
+
+    std::shared_ptr<Node<T>> slow = head;
+    std::shared_ptr<Node<T>> fast = head;
+
+    while (fast->get_next() != nullptr &&
+           fast->get_next()->get_next() != nullptr)
+    {
+        slow = slow->get_next();
+        fast = fast->get_next()->get_next();
+    }
+
+    return slow;
+}

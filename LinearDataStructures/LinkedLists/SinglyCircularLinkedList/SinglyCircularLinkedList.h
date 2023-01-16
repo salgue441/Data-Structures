@@ -77,6 +77,13 @@ private:
 
     // Private methods
     void swap_nodes(std::shared_ptr<Node<T>>, std::shared_ptr<Node<T>>);
+
+    // Privatae sorts
+    std::shared_ptr<Node<T>> middle(std::shared_ptr<Node<T>> &);
+    std::shared_ptr<Node<T>> merge_sort(std::shared_ptr<Node<T>>);
+    std::shared_ptr<Node<T>> merge_sort_descending(std::shared_ptr<Node<T>>);
+    std::shared_ptr<Node<T>> merge(std::shared_ptr<Node<T>>,
+                                   std::shared_ptr<Node<T>>);
 };
 
 #endif //! SINGLY_CIRCULAR_LINKED_LIST_H

@@ -19,17 +19,12 @@ int main()
     list.insert(7, 3);
     list.insert(8, 0);
 
-    std::cout << list << std::endl;
-
     list.pop_front();
     list.pop_back();
     list.remove(3);
 
-    std::cout << list << std::endl;
-
     list.reverse();
-    std::cout << list << std::endl;
 
-    list.ascending_bubble_sort();
+    list.ascending_merge_sort();
     std::cout << list << std::endl;
 }
